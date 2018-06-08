@@ -14,7 +14,7 @@ class {{class_prefix}}Spider(scrapy.Spider):
 
     def start_requests(self):
         urls = [
-            'https://huaiyun.pcbaby.com.cn/yuezi/',
+            'https://xxxx.com',
         ]
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parseList)
@@ -29,6 +29,6 @@ class {{class_prefix}}Spider(scrapy.Spider):
     def parseArticle(self, response):
         yield {
             'title': response.css('.artTit::text')[0].extract(),
-            'content': "".join(response.css('.artText p::text').extract()),
+            'content': "".join(response.css('.artText *::text').extract()),
             'tag': " ".join(response.css('.artLabel a::text').extract()),
         } 

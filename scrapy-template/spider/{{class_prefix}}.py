@@ -17,14 +17,14 @@ class {{class_prefix}}Spider(scrapy.Spider):
             'https://xxxx.com',
         ]
         for url in urls:
-            yield scrapy.Request(url=url, callback=self.parseList)
+            yield scrapy.Request(url=url, callback=self.parseList, headers=self.defaultHeaders)
         
     def parseList(self, response):
         blocks = response.css('.pic-txt')
         for b in blocks:
             url = 'https:' + b.css('.tit a::attr(href)')[0].extract()
             #yield {'url': url}
-            yield scrapy.Request(url=url, callback=self.parseArticle)
+            yield scrapy.Request(url=url, callback=self.parseArticle, headers=self.defaultHeaders)
     
     def parseArticle(self, response):
         yield {
